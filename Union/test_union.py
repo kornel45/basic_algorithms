@@ -4,7 +4,7 @@ Module responsible for unit test coverage of union module
 """
 from unittest import TestCase
 
-from algorithms.union import QuickUnionPathCompression, QuickFind, QuickUnion, QuickUnionWeighted
+from algorithms.Union.union import QuickUnionPathCompression, QuickFind, QuickUnion, QuickUnionWeighted
 
 
 class TestQuickFind(TestCase):
