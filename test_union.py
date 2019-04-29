@@ -4,12 +4,12 @@ Module responsible for unit test coverage of union module
 """
 from unittest import TestCase
 
-from algorithms.union import QuickUnionPathCompression, UnionQuickFind, UnionQuickUnion, QuickUnionWeighted
+from algorithms.union import QuickUnionPathCompression, QuickFind, QuickUnion, QuickUnionWeighted
 
 
-class TestUnionQuickFind(TestCase):
+class TestQuickFind(TestCase):
     def setUp(self):
-        self.u = UnionQuickFind(5)
+        self.u = QuickFind(5)
 
     def test_union_whenPNotConnectedWithQ_thenJoinsThem(self):
         self.u.is_connected = lambda x, y: False
@@ -32,9 +32,9 @@ class TestUnionQuickFind(TestCase):
         self.assertFalse(result)
 
 
-class TestUnionQuickUnion(TestCase):
+class TestQuickUnion(TestCase):
     def setUp(self):
-        self.u = UnionQuickUnion(5)
+        self.u = QuickUnion(5)
 
     def test_union_whenNotConnected_thenJoinsQRootToPRoot(self):
         self.u.union_array[1] = 2

@@ -3,7 +3,7 @@ import time
 import numpy as np
 
 
-class UnionQuickFind:
+class QuickFind:
     def __init__(self, n):
         self.union_array = list(range(n))
 
@@ -24,7 +24,7 @@ class UnionQuickFind:
         return 'UnionQuickFind'
 
 
-class UnionQuickUnion:
+class QuickUnion:
     def __init__(self, n):
         self.n = n
         self.union_array = list(range(n))
@@ -48,7 +48,7 @@ class UnionQuickUnion:
         return 'UnionQuickUnion'
 
 
-class QuickUnionWeighted(UnionQuickUnion):
+class QuickUnionWeighted(QuickUnion):
     def __init__(self, n):
         super().__init__(n)
         self.size_array = [1 for _ in range(n)]
@@ -82,7 +82,7 @@ class QuickUnionPathCompression(QuickUnionWeighted):
 
 
 n = 3 * 10**3
-unions = [UnionQuickFind, UnionQuickUnion, QuickUnionWeighted, QuickUnionPathCompression]
+unions = [QuickFind, QuickUnion, QuickUnionWeighted, QuickUnionPathCompression]
 vertices = [np.random.randint(0, n, 2) for i in range(n)]
 for union in unions:
     u = union(n)
