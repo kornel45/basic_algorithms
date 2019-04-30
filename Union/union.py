@@ -1,4 +1,5 @@
 import time
+from multiprocessing import Pool
 
 import numpy as np
 
@@ -21,7 +22,7 @@ class QuickFind:
         return len(set(self.union_array)) == 1
 
     def __repr__(self):
-        return 'UnionQuickFind'
+        return 'QuickFind'
 
 
 class QuickUnion:
@@ -45,7 +46,7 @@ class QuickUnion:
         return all([self.root(i) == tmp_root for i in self.union_array[1:]])
 
     def __repr__(self):
-        return 'UnionQuickUnion'
+        return 'QuickUnion'
 
 
 class QuickUnionWeighted(QuickUnion):
@@ -81,10 +82,7 @@ class QuickUnionPathCompression(QuickUnionWeighted):
         return 'QuickUnionPathCompression'
 
 
-n = 3 * 10**3
-unions = [QuickFind, QuickUnion, QuickUnionWeighted, QuickUnionPathCompression]
-vertices = [np.random.randint(0, n, 2) for i in range(n)]
-for union in unions:
+def simulation(union, n, vertices):
     u = union(n)
     s = time.time()
     for pair in vertices:
@@ -92,3 +90,10 @@ for union in unions:
     e = time.time()
     print(f'{u} took {e - s} seconds')
 
+
+if __name__ == '__main__':
+    n = 5 * 10 ** 4
+    unions = [QuickFind, QuickUnion, QuickUnionWeighted, QuickUnionPathCompression]
+    vertices = [np.random.randint(0, n, 2) for i in range(n)]
+    with Pool(2) as pool:
+        results = pool.starmap(simulation, ((union, n, vertices) for union in unions))
