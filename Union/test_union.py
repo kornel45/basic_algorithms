@@ -4,6 +4,8 @@ Module responsible for unit test coverage of union module
 """
 from unittest import TestCase
 
+from mock import patch
+
 from algorithms.Union.union import QuickUnionPathCompression, QuickFind, QuickUnion, QuickUnionWeighted
 
 
@@ -68,13 +70,33 @@ class TestQuickUnionWeighted(TestCase):
     def setUp(self):
         self.u = QuickUnionWeighted(5)
 
-    def test_union(self):
-        pass
+    @patch.object(QuickUnion, 'root')
+    def test_union_whenPSizeLessThanQSize_thenJoin(self, root_mock):
+        self.u.union_array = [0, 1, 2, 3, 4]
+        p, q = 0, 1
+        root_mock.side_effect = [p, q]
+        self.u.size_array[p] = p
+        self.u.size_array[q] = q
+        self.u.union(p, q)
+        self.assertEqual(self.u.union_array, [1, 1, 2, 3, 4])
+
+    @patch.object(QuickUnion, 'root')
+    def test_union_whenPSizeLessThanQSize_thenJoin(self, root_mock):
+        self.u.union_array = [0, 1, 2, 3, 4]
+        p, q = 0, 1
+        root_mock.side_effect = [p, q]
+        self.u.size_array[p] = q
+        self.u.size_array[q] = p
+        self.u.union(p, q)
+        self.assertEqual(self.u.union_array, [0, 0, 2, 3, 4])
 
 
 class TestQuickUnionPathCompression(TestCase):
     def setUp(self):
         self.u = QuickUnionPathCompression(5)
 
-    def test_union(self):
-        pass
+    def test_root_whenIHasGrandParent_thenChangeParentToGrandParent(self):
+        self.u.union_array = [1, 2, 2, 3, 4]
+        i = 0
+        self.u.root(i)
+        self.assertEqual(self.u.union_array, [2, 2, 2, 3, 4])

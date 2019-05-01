@@ -92,7 +92,7 @@ def simulation(union, n, vertices):
 
 
 if __name__ == '__main__':
-    n = 5 * 10 ** 4
+    n = 3 * 10 ** 4
     unions = [QuickFind, QuickUnion, QuickUnionWeighted, QuickUnionPathCompression]
     vertices = [np.random.randint(0, n, 2) for i in range(n)]
     with Pool(2) as pool:
