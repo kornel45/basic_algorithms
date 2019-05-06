@@ -2,6 +2,8 @@ import os
 import time
 from multiprocessing.pool import Pool
 
+from gen_data import read_one_file
+
 
 def naive_solution(array, n):
     """ O( n^3 ) """
@@ -75,11 +77,9 @@ if __name__ == '__main__':
     array_list = []
     array_names = []
     for f_path in sorted(os.listdir('data'), key=lambda x: int(x.split('_')[0])):
-        n, k = [int(x) for x in f_path.split('_')[:2]]
-        with open(f'data/{n}_{k}_3SUM_ROWS.txt', 'r') as f:
-            data = [int(x) for x in f.read().split()]
-            array_list.append(data)
-            array_names.append(len(data))
+        data = read_one_file(f_path)
+        array_list.append(data)
+        array_names.append(len(data))
 
     with Pool(6) as pool:
         pool.starmap(sort_solution, (x for x in zip(array_list, array_names)))
