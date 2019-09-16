@@ -11,6 +11,6 @@ def binary_search(value, lst):
 		else:
 			low = index
 	return None 
-
-result = binary_search(10, list(range(1500)))
-print(result)
+if __name__ == '__main__':
+    result = binary_search(2, range(1500))
+    print(result)
