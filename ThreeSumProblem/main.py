@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import os
 import time
 from multiprocessing.pool import Pool

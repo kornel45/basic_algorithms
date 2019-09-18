@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/python
 """
 Module responsible for unit test coverage of union module
 """
