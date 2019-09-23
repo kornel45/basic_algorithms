@@ -7,5 +7,10 @@ pipeline {
         echo 'Pulled'
       }
     }
+    stage('') {
+      steps {
+        sh 'ls'
+      }
+    }
   }
 }
