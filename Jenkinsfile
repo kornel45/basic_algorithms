@@ -10,6 +10,7 @@ pipeline {
     stage('error') {
       steps {
         sh 'pwd'
+        sh 'ls'
       }
     }
   }
