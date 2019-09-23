@@ -7,9 +7,9 @@ pipeline {
         echo 'Pulled'
       }
     }
-    stage('') {
+    stage('error') {
       steps {
-        sh 'ls'
+        sh 'pwd'
       }
     }
   }
